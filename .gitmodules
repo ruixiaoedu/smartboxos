@@ -1,4 +1,4 @@
 [submodule "buildroot"]
 	path = buildroot
-	url = git@github.com:ruixiaoedu/buildroot.git
+	url = https://github.com/ruixiaoedu/buildroot
 	branch = 2021.11.x.smartbox
