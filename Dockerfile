@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         sudo \
         vim \
         python3 \
+        ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # Get buildroot
