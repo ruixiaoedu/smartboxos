@@ -21,9 +21,9 @@ BR2_INIT_SYSTEMD=y
 # 预先设置的根目录
 BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_SMARTBOXOS_PATH)/rootfs-overlay $(BR2_EXTERNAL_SMARTBOXOS_PATH)/board/raspberrypi/rootfs-overlay"
 # 在生成文件系统映像之前运行任意命令
-BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_SMARTBOXOS_PATH)/board/raspberrypi/scripts/post-build.sh"
+BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_SMARTBOXOS_PATH)/board/raspberrypi/post-build.sh"
 # 对最终生成的images进行打包处理等
-BR2_ROOTFS_POST_IMAGE_SCRIPT="$(BR2_EXTERNAL_SMARTBOXOS_PATH)/board/raspberrypi/scripts/post-image.sh"
+BR2_ROOTFS_POST_IMAGE_SCRIPT="$(BR2_EXTERNAL_SMARTBOXOS_PATH)/board/raspberrypi/post-image.sh"
 
 #
 # Linux 内核相关
