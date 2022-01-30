@@ -3,5 +3,5 @@
 set -u
 set -e
 
-# Fix overlay presets
-"${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable getty@tty1.service
+# 开启getty登录支持
+"${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable console-getty.service getty@tty1.service

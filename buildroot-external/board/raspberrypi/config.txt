@@ -22,7 +22,7 @@ gpu_mem_1024=100
 # fixes rpi (3B, 3B+, 3A+, 4B and Zero W) ttyAMA0 serial console
 dtoverlay=miniuart-bt
 
-# enable 64bits support
+# 开启64位支持
 arm_64bit=1
 
 # 添加USB支持
