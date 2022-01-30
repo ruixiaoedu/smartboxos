@@ -1,5 +1,4 @@
 BUILDDIR:=$(shell pwd)
-RELEASE_DIR = $(BUILDDIR)/release
 
 BUILDROOT=$(BUILDDIR)/buildroot
 BUILDROOT_EXTERNAL=$(BUILDDIR)/buildroot-external
@@ -8,8 +7,6 @@ VERSION_DATE := $(shell date --utc +'%Y%m%d')
 
 TARGETS := $(notdir $(patsubst %_defconfig,%,$(wildcard $(DEFCONFIG_DIR)/*_defconfig)))
 TARGETS_CONFIG := $(notdir $(patsubst %_defconfig,%-config,$(wildcard $(DEFCONFIG_DIR)/*_defconfig)))
-
-$(info “here is the debug info, $(TARGETS_CONFIG)”)
 
 # Set O variable if not already done on the command line
 ifneq ("$(origin O)", "command line")
@@ -24,9 +21,6 @@ endif
 
 all: $(TARGETS)
 
-$(RELEASE_DIR):
-	mkdir -p $(RELEASE_DIR)
-
 $(TARGETS_CONFIG): %-config:
 	@echo "config $*"
 	$(MAKE) -C $(BUILDROOT) O=$(O) BR2_EXTERNAL=$(BUILDROOT_EXTERNAL) "$*_defconfig"
@@ -34,13 +28,6 @@ $(TARGETS_CONFIG): %-config:
 $(TARGETS): %: $(RELEASE_DIR) %-config
 	@echo "build $@"
 	$(MAKE) -C $(BUILDROOT) O=$(O) BR2_EXTERNAL=$(BUILDROOT_EXTERNAL)
-	cp -f $(O)/images/smartboxos.img $(RELEASE_DIR)/
-
-	# Do not clean when building for one target
-ifneq ($(words $(filter $(TARGETS),$(MAKECMDGOALS))), 1)
-	@echo "clean $@"
-	$(MAKE) -C $(BUILDROOT) O=$(O) BR2_EXTERNAL=$(BUILDROOT_EXTERNAL) clean
-endif
 	@echo "finished $@"
 
 clean:
