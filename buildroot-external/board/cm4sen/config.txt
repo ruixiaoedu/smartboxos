@@ -1,0 +1,40 @@
+# 查看 http://buildroot.org/manual.html#rootfs-custom
+# 和 http://elinux.org/RPiconfig 有关 config.txt 语法的说明
+
+start_file=start4.elf
+fixup_file=fixup4.dat
+
+kernel=Image
+
+# 如果显示在屏幕上的文本从边缘消失，请将其注释掉
+disable_overscan=1
+
+# 在具有 256、512 或 1024 MB 总内存的 Pi 型号上分配给 GPU 的内存量（以 MB 为单位）
+gpu_mem_256=64
+gpu_mem_512=64
+gpu_mem_1024=64
+
+# 修复 rpi（3B、3B+、3A+、4B和0W）ttyAMA0 串行控制台
+dtoverlay=miniuart-bt
+
+# 开启64位支持
+arm_64bit=1
+
+# 添加USB支持
+dtoverlay=dwc2,dr_mode=host
+
+# CM4SEN专用配置
+dtparam=i2c_arm=on
+enable_uart=1
+otg_mode=1
+
+dtoverlay=ed-sdhost
+dtoverlay=i2c-rtc,pcf8563
+dtoverlay=spi1-1cs,cs0_pin=18,cs0_spidev=disabled
+dtoverlay=ed-mcp2515-spi1-can0
+dtoverlay=uart2
+dtoverlay=uart3
+dtoverlay=uart4
+dtoverlay=uart5
+
+gpio=11=op,dl

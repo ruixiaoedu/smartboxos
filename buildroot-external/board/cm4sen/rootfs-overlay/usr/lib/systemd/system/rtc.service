@@ -1,0 +1,13 @@
+[Unit]
+Description=RTC Load and Sync Service
+Before=systemd-timedated.service
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/hwclock -s
+RemainAfterExit=true
+StandardOutput=journal
+ExecStop=/sbin/hwclock -w
+
+[Install]
+WantedBy=multi-user.target
