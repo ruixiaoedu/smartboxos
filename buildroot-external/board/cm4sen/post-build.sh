@@ -10,6 +10,7 @@ BSP_INST_HOME_PATH=$(dirname $(realpath $0))
 TARGET_ROOTFS_PATH=${BINARIES_DIR}
 
 BLACKLIST=${TARGET_DIR}/etc/modprobe.d/raspi-blacklist.conf
+BLACKLIST_DIR=$(dirname $BLACKLIST)
 MODULES_FILE=${TARGET_DIR}/etc/modules
 
 module_load() {
@@ -43,6 +44,7 @@ module_load_spi() {
 
 do_modules() {
     if ! [ -e $BLACKLIST ]; then
+        mkdir -p $BLACKLIST_DIR
         touch $BLACKLIST
     fi
 
