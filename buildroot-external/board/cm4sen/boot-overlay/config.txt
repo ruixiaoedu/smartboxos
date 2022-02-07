@@ -20,6 +20,9 @@ dtoverlay=miniuart-bt
 # 开启64位支持
 arm_64bit=1
 
+# 关闭启动时候的彩虹屏幕
+disable_splash=1
+
 # 添加USB支持
 dtoverlay=dwc2,dr_mode=host
 
