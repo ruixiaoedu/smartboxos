@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Return value will likely be error for fdisk as it fails to reload the
+# partition table because the root fs is mounted
+fdisk /dev/mmcblk0 <<EOF
+p
+d
+2
+n
+p
+2
+
+
+p
+w
+EOF
+
+cat <<EOF | tee /etc/systemd/system/resizefs-root.service
+[Unit]
+Description=resize ext4 file system
+After=local-fs.target
+Wants=local-fs.target
+
+[Service]
+ExecStart=/bin/bash -c "/usr/sbin/resize2fs /dev/mmcblk0p2 || exit 0"
+ExecStop=/bin/bash -c "/usr/bin/systemctl disable resizefs-root && rm /etc/systemd/system/resizefs-root.service && /usr/bin/systemctl daemon-reload && /usr/bin/systemctl reset-failed || exit 0"
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+rm /usr/sbin/init_resize
+
+reboot
