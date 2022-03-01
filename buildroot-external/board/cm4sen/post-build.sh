@@ -14,4 +14,4 @@ cp $BSP_INST_HOME_PATH/boot-overlay/overlays/*.dtbo ${BINARIES_DIR}/rpi-firmware
 "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable rtc.service
 
 # 开启分区功能
-"${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable resizefs-root.service
+# "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable resizefs-root.service
