@@ -1,16 +1,12 @@
-From 5dd172ee5a678ad786b20fe378287c571fd41285 Mon Sep 17 00:00:00 2001
+From 3d2808e455f90098755c442f614d7990b77fc22f Mon Sep 17 00:00:00 2001
 From: Harry Rong <harrykobe@gmail.com>
-Date: Sat, 5 Mar 2022 15:05:47 +0800
-Subject: [PATCH] =?UTF-8?q?=E5=A2=9E=E5=8A=A0=E5=90=88=E5=AE=99=E9=A9=B1?=
- =?UTF-8?q?=E5=8A=A8?=
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Sat, 5 Mar 2022 16:11:37 +0800
+Subject: [PATCH] add Air 720
 
 ---
  drivers/usb/serial/option.c   |  7 +++++++
- drivers/usb/serial/usb_wwan.c | 13 +++++++++++++
- 2 files changed, 20 insertions(+)
+ drivers/usb/serial/usb_wwan.c | 14 ++++++++++++++
+ 2 files changed, 21 insertions(+)
 
 diff --git a/drivers/usb/serial/option.c b/drivers/usb/serial/option.c
 index c7356718a7c6..7c2b486b0a27 100644
@@ -38,10 +34,10 @@ index c7356718a7c6..7c2b486b0a27 100644
  };
  
 diff --git a/drivers/usb/serial/usb_wwan.c b/drivers/usb/serial/usb_wwan.c
-index b2285d5a869d..36e40cf6dcf4 100644
+index b2285d5a869d..4ca3aecb9bd8 100644
 --- a/drivers/usb/serial/usb_wwan.c
 +++ b/drivers/usb/serial/usb_wwan.c
-@@ -480,6 +480,19 @@ static struct urb *usb_wwan_setup_urb(struct usb_serial_port *port,
+@@ -480,6 +480,20 @@ static struct urb *usb_wwan_setup_urb(struct usb_serial_port *port,
  	if (intfdata->use_zlp && dir == USB_DIR_OUT)
  		urb->transfer_flags |= URB_ZERO_PACKET;
  
@@ -53,7 +49,8 @@ index b2285d5a869d..36e40cf6dcf4 100644
 +            urb->transfer_flags |= URB_ZERO_PACKET;
 +        }
 +        if((desc->idVendor == cpu_to_le16(0x1782) && desc->idProduct == cpu_to_le16(0x4e00))  )   /* 720U 系列*/
-+            urb->transfer_flags |= URB_ZERO_PACKET;
++        { 
++			urb->transfer_flags |= URB_ZERO_PACKET;
 +        }
 +    }
 +    //-add by airm2m for Air72x
