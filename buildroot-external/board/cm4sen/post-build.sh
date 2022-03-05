@@ -13,6 +13,9 @@ cp $BSP_INST_HOME_PATH/boot-overlay/overlays/*.dtbo ${BINARIES_DIR}/rpi-firmware
 # 开启RTC功能
 "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable rtc.service
 
+# 加载重置文件系统大小
+"${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable resize2fs_once
+
 # 加载BOOT
 install -d -m 0755 ${TARGET_DIR}/boot
 echo '/dev/mmcblk0p1 /boot vfat defaults 0 0' >> ${TARGET_DIR}/etc/fstab

@@ -1,0 +1,58 @@
+From a39045c177a695df39702694a42b8f1e3e3b6a76 Mon Sep 17 00:00:00 2001
+From: Harry Rong <harrykobe@gmail.com>
+Date: Fri, 4 Mar 2022 23:43:34 +0800
+Subject: [PATCH] add by airm2m for Air720
+
+---
+ drivers/usb/serial/option.c   |  6 ++++++
+ drivers/usb/serial/usb_wwan.c | 10 ++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/drivers/usb/serial/option.c b/drivers/usb/serial/option.c
+index c7356718a7c6..7e11a223a07b 100644
+--- a/drivers/usb/serial/option.c
++++ b/drivers/usb/serial/option.c
+@@ -585,6 +585,9 @@ static void option_instat_callback(struct urb *urb);
+ 
+ 
+ static const struct usb_device_id option_ids[] = {
++	//+add by airm2m for Air72x
++    { USB_DEVICE(0x1286, 0x4e3d) },
++    //-add by airm2m for Air72x
+ 	{ USB_DEVICE(OPTION_VENDOR_ID, OPTION_PRODUCT_COLT) },
+ 	{ USB_DEVICE(OPTION_VENDOR_ID, OPTION_PRODUCT_RICOLA) },
+ 	{ USB_DEVICE(OPTION_VENDOR_ID, OPTION_PRODUCT_RICOLA_LIGHT) },
+@@ -2133,6 +2136,9 @@ static struct usb_serial_driver option_1port_device = {
+ #ifdef CONFIG_PM
+ 	.suspend           = usb_wwan_suspend,
+ 	.resume            = usb_wwan_resume,
++	//+add by airm2m for Air720
++    .reset_resume      = usb_wwan_resume,
++    //-add by airm2m for Air720
+ #endif
+ };
+ 
+diff --git a/drivers/usb/serial/usb_wwan.c b/drivers/usb/serial/usb_wwan.c
+index b2285d5a869d..5dd6de8458a7 100644
+--- a/drivers/usb/serial/usb_wwan.c
++++ b/drivers/usb/serial/usb_wwan.c
+@@ -480,6 +480,16 @@ static struct urb *usb_wwan_setup_urb(struct usb_serial_port *port,
+ 	if (intfdata->use_zlp && dir == USB_DIR_OUT)
+ 		urb->transfer_flags |= URB_ZERO_PACKET;
+ 
++	//+add by airm2m for Air72x
++    if(dir == USB_DIR_OUT){
++        struct usb_device_descriptor *desc = &serial->dev->descriptor;
++        if(desc->idVendor == cpu_to_le16(0x1286) && desc->idProduct == cpu_to_le16(0x4e3d))
++        {
++            urb->transfer_flags |= URB_ZERO_PACKET;
++        }
++    }
++    //-add by airm2m for Air72x
++
+ 	return urb;
+ }
+ 
+-- 
+2.18.0
+

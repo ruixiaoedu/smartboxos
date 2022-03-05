@@ -1,0 +1,12 @@
+[Unit]
+Description=resize ext4 file system
+After=local-fs.target
+Wants=local-fs.target
+
+[Service]
+ExecStart=/bin/bash -c "ROOT_DEV=$(findmnt / -o source -n) && resize2fs $ROOT_DEV || exit 0"
+ExecStop=/bin/bash -c "systemctl disable resize2fs_once && rm /etc/systemd/system/resize2fs_once.service && systemctl daemon-reload && systemctl reset-failed || exit 0"
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
