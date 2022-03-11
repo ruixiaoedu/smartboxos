@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/sbin/lte_connect.sh
+ExecStart=/usr/sbin/lte_connect
 
 [Install]
 WantedBy=multi-user.target
