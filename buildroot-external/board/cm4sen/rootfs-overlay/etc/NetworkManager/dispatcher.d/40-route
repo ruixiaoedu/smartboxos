@@ -1,0 +1,5 @@
+GW=$(ip route | grep default | grep eth1 | awk ' {print $3}')
+if [ -n "$GW" ]; then
+    ip route del default via $GW dev eth1
+    ip route add default via $GW dev eth1 metric 0
+fi

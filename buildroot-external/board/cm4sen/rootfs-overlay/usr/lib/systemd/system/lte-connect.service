@@ -1,0 +1,10 @@
+[Unit]
+Description=EDATEC LTE Auto Connection
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/lte_connect.sh
+
+[Install]
+WantedBy=multi-user.target
