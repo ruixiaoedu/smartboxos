@@ -14,7 +14,7 @@ cp $BSP_INST_HOME_PATH/boot-overlay/overlays/*.dtbo ${BINARIES_DIR}/rpi-firmware
 "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable rtc.service
 
 # 开启4G连接功能
-"${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable lte-connect.service
+"${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable lte-reconnect.service
 
 # 加载重置文件系统大小
 "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable resize2fs_once

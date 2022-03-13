@@ -1,7 +1,13 @@
 #!/bin/bash
+#
+# Created by ahnniu@gmail.com in Oct 2020
+#
 
 BSP_HOME_PATH=$(dirname $(realpath $0))
 LTE_RST_PIN=10
+LOG_PATH=/var/log/ed-ec20-qmi
+LOGFILE=$LOG_PATH/quectel-CM.log
+
 
 function do_lte_init_rst_pin() {
     raspi-gpio set $LTE_RST_PIN pd
@@ -15,16 +21,24 @@ function do_lte_rst() {
     # it takes a while to load the device after reset
     sleep 10
 
-    until [ -e /sys/class/net/eth1 ]
+    until [ -e /sys/class/net/wwan0 ]
     do
         sleep 1
     done
 }
 
 function do_connect() {
+    printf "Kill all quectel-CM ...\n"
+    killall -q quectel-CM
+
     printf "Reset lte module ...\n"
     do_lte_rst
+
+    printf "Try to connect ...\n"
+    $BSP_HOME_PATH/quectel-CM -4 -f $LOGFILE &
 }
+
+mkdir -p $LOG_PATH
 
 do_lte_init_rst_pin
 
@@ -32,7 +46,7 @@ while true; do
 
     # it's better to ping a ip rather than a domain
     # ping Alibaba DNS server
-    ping -I eth1 -c 1 -s 0 223.5.5.5
+    ping -I wwan0 -c 1 -s 0 223.5.5.5
 
     if [ $? -eq 0 ]; then
         echo "Connection up, reconnect not required..."

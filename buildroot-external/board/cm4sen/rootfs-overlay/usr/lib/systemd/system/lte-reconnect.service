@@ -1,0 +1,10 @@
+[Unit]
+Description=EDATEC Quectel EC20 LTE Auto Connection
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/share/ed-ec20-qmi/lte-reconnect.sh
+
+[Install]
+WantedBy=multi-user.target
