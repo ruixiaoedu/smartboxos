@@ -1,3 +1,7 @@
+OTA_VERSION = 0.0.1
+OTA_SITE = https://github.com/ruixiaoedu/ota/archive
+OTA_SOURCE = $(OTA_VERSION).tar.gz
+
 define OTA_INSTALL_CONFIG_FILES
 	$(INSTALL) -d -m 755 $(TARGET_DIR)/etc/ota
 
