@@ -1,1 +1,1 @@
-# source "$BR2_EXTERNAL_SMARTBOXOS_PATH/package/smartbox/Config.in"
+source "$BR2_EXTERNAL_SMARTBOXOS_PATH/package/ota/Config.in"

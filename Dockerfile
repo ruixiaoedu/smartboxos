@@ -4,7 +4,7 @@ FROM debian:bullseye
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # change to aliyun
-RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list
+RUN sed -i "s@http://deb.debian.org@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
 
 # Build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \

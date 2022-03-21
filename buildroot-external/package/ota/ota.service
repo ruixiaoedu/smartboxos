@@ -1,0 +1,13 @@
+[Unit]
+Description=OTA update service
+After=systemd-resolved.service
+
+[Service]
+Type=idle
+User=root
+Group=root
+ExecStart=/usr/bin/ota service
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

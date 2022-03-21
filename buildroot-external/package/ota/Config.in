@@ -1,0 +1,17 @@
+config BR2_PACKAGE_OTA
+	bool "ota"
+    depends on BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
+	depends on BR2_PACKAGE_HOST_GO_TARGET_CGO_LINKING_SUPPORTS
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+    select BR2_PACKAGE_OPENSSL
+    help
+	  OTA is an open source over-the-air (OTA) software updater
+	  for embedded Linux devices. OTA comprises a client
+	  running at the embedded device, as well as a server that
+	  manages deployments across many devices.
+
+
+comment "ota needs a toolchain w/ threads"
+	depends on BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
+	depends on BR2_PACKAGE_HOST_GO_TARGET_CGO_LINKING_SUPPORTS
+	depends on !BR2_TOOLCHAIN_HAS_THREADS
