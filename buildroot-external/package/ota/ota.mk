@@ -1,4 +1,4 @@
-OTA_VERSION = 0.0.1
+OTA_VERSION = 0.0.2
 OTA_SITE = https://github.com/ruixiaoedu/ota/archive
 OTA_SOURCE = $(OTA_VERSION).tar.gz
 
