@@ -6,7 +6,7 @@ After=systemd-resolved.service
 Type=idle
 User=root
 Group=root
-ExecStart=/usr/bin/ota service
+ExecStart=/usr/bin/ota demon
 Restart=on-abort
 
 [Install]
