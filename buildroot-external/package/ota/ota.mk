@@ -2,6 +2,9 @@ OTA_VERSION = 0.0.1
 OTA_SITE = https://github.com/ruixiaoedu/ota/archive
 OTA_SOURCE = $(OTA_VERSION).tar.gz
 
+OTA_BUILD_TARGETS = cli
+OTA_GOMOD = github.com/ruixiaoedu/ota
+
 define OTA_INSTALL_CONFIG_FILES
 	$(INSTALL) -d -m 755 $(TARGET_DIR)/etc/ota
 
