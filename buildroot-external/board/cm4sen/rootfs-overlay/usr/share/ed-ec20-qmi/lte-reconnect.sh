@@ -42,18 +42,25 @@ mkdir -p $LOG_PATH
 
 do_lte_init_rst_pin
 
+do_connect
+
 while true; do
 
-    # it's better to ping a ip rather than a domain
-    # ping Alibaba DNS server
     ping -I wwan0 -c 1 -s 0 223.5.5.5
 
     if [ $? -eq 0 ]; then
         echo "Connection up, reconnect not required..."
     else
-        echo "Connection down, reconnecting..."
-        do_connect
+        # 10秒后重试，防止偶发性网络抖动导致4G断开
+        sleep 10
+        ping -I wwan0 -c 1 -s 0 223.5.5.5
 
+        if [ $? -eq 0 ]; then
+            echo "Connection up, reconnect not required..."
+        else
+            echo "Connection down, reconnecting..."
+            do_connect
+        fi
     fi
 
     sleep 40
