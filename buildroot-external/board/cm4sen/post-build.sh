@@ -20,7 +20,7 @@ cp $BSP_INST_HOME_PATH/boot-overlay/overlays/*.dtbo ${BINARIES_DIR}/rpi-firmware
 "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" enable resize2fs_once
 
 # 配置文件读写权限，否则无法适配网络
-install -d -m 0600 ${TARGET_DIR}/etc/NetworkManager/system-connections/eth0.nmconnection
+chmod 600 ${TARGET_DIR}/etc/NetworkManager/system-connections/eth0.nmconnection
 
 # 加载BOOT
 install -d -m 0755 ${TARGET_DIR}/boot
